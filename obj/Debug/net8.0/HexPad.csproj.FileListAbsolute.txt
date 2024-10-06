@@ -71,3 +71,4 @@
 /home/birb/HexPad/bin/Debug/net8.0/ReactiveUI.dll
 /home/birb/HexPad/bin/Debug/net8.0/Splat.dll
 /home/birb/HexPad/bin/Debug/net8.0/System.Reactive.dll
+/home/birb/HexPad/obj/Debug/net8.0/HexPad.sourcelink.json

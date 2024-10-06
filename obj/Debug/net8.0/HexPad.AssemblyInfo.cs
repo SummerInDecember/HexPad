@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HexPad")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3d27a9a4dfc3881d39a80b67dcf47946277493e")]
 [assembly: System.Reflection.AssemblyProductAttribute("HexPad")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HexPad")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

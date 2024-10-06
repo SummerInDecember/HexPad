@@ -7,7 +7,8 @@
         x:Class="HexPad.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="HexPad">
+        Title="HexPad"
+        xmlns:svg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.Svg">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -28,7 +29,11 @@
         </DockPanel>
         <Grid ColumnDefinitions="50, *" RowDefinitions="*">
             <StackPanel>
-                
+               <Button>
+                    <Button.Content>
+                        <Image Source="avares://HexPad/Assets/Folder.png"/>
+                    </Button.Content>
+               </Button> 
             </StackPanel>
         </Grid>
     </StackPanel>
