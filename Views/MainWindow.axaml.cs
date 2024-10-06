@@ -11,15 +11,17 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using HexPad.Views;
 using ReactiveUI;
+using Avalonia.ReactiveUI;
+using Avalonia.Markup.Xaml;
 
 namespace HexPad.Views;
 
-public partial class MainWindow : Window
+public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     public MainWindow()
     {
-        InitializeComponent();
-        DataContext = new MainWindowViewModel();
+        this.WhenActivated(disposables => { });
+        AvaloniaXamlLoader.Load(this);
     }
 
     private async void OpenFolderButton_Click(object sender, RoutedEventArgs e)

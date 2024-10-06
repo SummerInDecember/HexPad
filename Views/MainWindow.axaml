@@ -1,5 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:rxui="http://reactiveui.net"
         xmlns:vm="using:HexPad.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,8 +8,8 @@
         x:Class="HexPad.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="HexPad"
-        xmlns:svg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.Svg">
+        xmlns:app="clr-namespace:HexPad"
+        Title="HexPad">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -27,14 +28,21 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Grid ColumnDefinitions="50, *" RowDefinitions="*">
-            <StackPanel>
-               <Button>
+        <Grid ColumnDefinitions="50, 100, *" RowDefinitions="*">
+            <StackPanel Grid.Column="0">
+               <Button Command="{Binding GoFileExp}">
                     <Button.Content>
                         <Image Source="avares://HexPad/Assets/Folder.png"/>
                     </Button.Content>
                </Button> 
             </StackPanel>
+            <rxui:RoutedViewHost Grid.Column="1" Router="{Binding Router}">
+                <rxui:RoutedViewHost.DefaultContent>
+                </rxui:RoutedViewHost.DefaultContent>
+                <rxui:RoutedViewHost.ViewLocator>
+                    <app:AppViewLocator/>
+                </rxui:RoutedViewHost.ViewLocator>
+            </rxui:RoutedViewHost>
         </Grid>
     </StackPanel>
 </Window>

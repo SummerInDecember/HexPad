@@ -22,5 +22,8 @@ build_property.EnableGeneratedComInterfaceComImportInterop =
 [/home/birb/HexPad/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[/home/birb/HexPad/Views/FileView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/home/birb/HexPad/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

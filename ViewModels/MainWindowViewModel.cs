@@ -10,14 +10,19 @@ using ReactiveUI;
 
 namespace HexPad.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : ViewModelBase, IScreen
 {
 #pragma warning disable CA1822 // Mark members as static
 
+    public RoutingState Router { get; } = new RoutingState();
+
     public string SelectedFolder { get; set; } = String.Empty;
     public string SelectedFile { get; set; } = String.Empty;  
+
+    public ReactiveCommand<Unit, IRoutableViewModel> GoFileExp {get;}
     public MainWindowViewModel()
     {
+        GoFileExp = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new FileViewModel(this)));
     }
 
 
