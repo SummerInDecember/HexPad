@@ -13,6 +13,15 @@
         <vm:FileViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="HAII"/>
+   <TreeView ItemsSource="{Binding FileNode}"
+             SelectedItems="{Binding SelectedNodes}"
+             Margin="15"
+             SelectionMode="Multiple">
+        <TreeView.ItemTemplate>
+            <TreeDataTemplate ItemsSource="{Binding SubNodes}">
+                <TextBlock Text="{Binding Title}"/>
+            </TreeDataTemplate>
+        </TreeView.ItemTemplate>
+    </TreeView>
     
 </UserControl>
