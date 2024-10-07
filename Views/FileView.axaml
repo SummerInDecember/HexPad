@@ -12,16 +12,19 @@
         <!-- This sets the DataContext for the previewer in the IDE -->
         <vm:FileViewModel/>
     </Design.DataContext>
-
-   <TreeView ItemsSource="{Binding FileNode}"
-             SelectedItems="{Binding SelectedNodes}"
-             Margin="15"
-             SelectionMode="Multiple">
-        <TreeView.ItemTemplate>
-            <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                <TextBlock Text="{Binding Title}"/>
-            </TreeDataTemplate>
-        </TreeView.ItemTemplate>
-    </TreeView>
+    <Border Background="AliceBlue" Height="500" Margin="0">
+        <ScrollViewer>
+            <TreeView ItemsSource="{Binding FileNode}"
+                    SelectedItems="{Binding SelectedNodes}"
+                    Margin="0"
+                    SelectionMode="Multiple">
+                <TreeView.ItemTemplate>
+                    <TreeDataTemplate ItemsSource="{Binding SubNodes}">
+                        <TextBlock Text="{Binding Title}"/>
+                    </TreeDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </ScrollViewer>
+    </Border>
     
 </UserControl>

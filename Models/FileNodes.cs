@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace HexPad.Models
 {
@@ -20,6 +21,16 @@ namespace HexPad.Models
         {
             Title = title;
             SubNodes = subNodes;
+        }
+
+        public FileNodes(string folder, char a) // This char is here just so i can overload
+        {                                       // this contructor (I beg forgiveness from my professors)
+
+            foreach(string file in Directory.GetFiles(folder))
+            {
+                Console.WriteLine(file);
+                new FileNodes(file);
+            }
         }
     }
 }

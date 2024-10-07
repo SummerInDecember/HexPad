@@ -22,7 +22,7 @@ public partial class MainWindowViewModel : ViewModelBase, IScreen
     public ReactiveCommand<Unit, IRoutableViewModel> GoFileExp {get;}
     public MainWindowViewModel()
     {
-        GoFileExp = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new FileViewModel(this)));
+        GoFileExp = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new FileViewModel(this, this)));
     }
 
 
