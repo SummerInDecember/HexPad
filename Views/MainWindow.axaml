@@ -28,7 +28,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Grid ColumnDefinitions="50, 150, *" RowDefinitions="*">
+        <Grid ColumnDefinitions="50, 200, *" RowDefinitions="*">
             <StackPanel Grid.Column="0">
                <Button Command="{Binding GoFileExp}">
                     <Button.Content>

@@ -12,7 +12,7 @@
         <!-- This sets the DataContext for the previewer in the IDE -->
         <vm:FileViewModel/>
     </Design.DataContext>
-    <Border Background="AliceBlue" Height="500" Margin="0">
+    <Border Background="AliceBlue" Height="450" Margin="0">
         <ScrollViewer>
             <TreeView ItemsSource="{Binding FileNode}"
                     SelectedItems="{Binding SelectedNodes}"
@@ -20,7 +20,7 @@
                     SelectionMode="Multiple">
                 <TreeView.ItemTemplate>
                     <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                        <TextBlock Text="{Binding Title}"/>
+                        <TextBlock Text="{Binding Title}" FontSize="13"/>
                     </TreeDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>

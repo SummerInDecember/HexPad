@@ -28,20 +28,34 @@ namespace HexPad.ViewModels
             SelectedNodes = new ObservableCollection<FileNodes>();
             FileNode = new ObservableCollection<FileNodes>();
 
-            AddFilesToSubFolder(folder, FileNode);
+            AddSubFoldersRecursive(folder, FileNode);
 
             var moth = FileNode.Last().SubNodes?.Last();
             if (moth!=null) SelectedNodes.Add(moth);  
         }
 
         /**
-        * TODO: Keep working 
+        * Function adds the subfolders to the treeview and calls the "AddFilesToSubFolder" method
+        * to add the files to those subfolders
         */
-        void AddSubFoldersRecursive(string folder, ObservableCollection<FileNodes> parentNode = null)
+        void AddSubFoldersRecursive(string folder, ObservableCollection<FileNodes> parentNode)
         {
-            
+            AddFilesToSubFolder(folder, parentNode);
+
+            string[] subFolders = Directory.GetDirectories(folder);
+            if(subFolders.Length == 0)
+                return;
+            foreach(string subFol in subFolders)
+            {
+                FileNodes subFolderNode = new FileNodes(subFol, new ObservableCollection<FileNodes>());
+                parentNode.Add(subFolderNode);
+                AddSubFoldersRecursive(subFol, subFolderNode.SubNodes);
+            }
         }
 
+        /**
+        * Function adds the files in the folder to the treeview
+        */
         void AddFilesToSubFolder(string folder, ObservableCollection<FileNodes> parentNode)
         {
             foreach(string file in Directory.GetFiles(folder))
