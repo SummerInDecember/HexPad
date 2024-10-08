@@ -28,10 +28,7 @@ namespace HexPad.ViewModels
             SelectedNodes = new ObservableCollection<FileNodes>();
             FileNode = new ObservableCollection<FileNodes>();
 
-            foreach(string file in Directory.GetFiles(folder))
-            {
-                FileNode.Add(new FileNodes(file));
-            }
+            AddFilesToSubFolder(folder, FileNode);
 
             var moth = FileNode.Last().SubNodes?.Last();
             if (moth!=null) SelectedNodes.Add(moth);  
@@ -40,9 +37,17 @@ namespace HexPad.ViewModels
         /**
         * TODO: Keep working 
         */
-        void AddSubFoldersAndFilesRecursive(string folder)
+        void AddSubFoldersRecursive(string folder, ObservableCollection<FileNodes> parentNode = null)
         {
             
+        }
+
+        void AddFilesToSubFolder(string folder, ObservableCollection<FileNodes> parentNode)
+        {
+            foreach(string file in Directory.GetFiles(folder))
+            {
+                parentNode.Add(new FileNodes(file));
+            }
         }
     }
 }
