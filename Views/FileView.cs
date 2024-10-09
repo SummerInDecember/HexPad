@@ -19,5 +19,6 @@ namespace HexPad.Views
             this.WhenActivated(disposables => { });
             AvaloniaXamlLoader.Load(this);
         }
+
     }
 }

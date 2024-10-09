@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Threading.Tasks;
 using HexPad.Models;
 using ReactiveUI;
@@ -17,6 +18,7 @@ namespace HexPad.ViewModels
         public ObservableCollection<FileNodes> FileNode { get; set;}
         public ObservableCollection<FileNodes> SelectedNodes { get; set;}
 
+
         public FileViewModel(IScreen screen, MainWindowViewModel mainWin)
         { 
             HostScreen = screen;
@@ -30,8 +32,17 @@ namespace HexPad.ViewModels
 
             AddSubFoldersRecursive(folder, FileNode);
 
-            var moth = FileNode.Last().SubNodes?.Last();
-            if (moth!=null) SelectedNodes.Add(moth);  
+            try
+            {
+                var moth = FileNode.Last().SubNodes?.Last();
+                if (moth!=null) SelectedNodes.Add(moth); 
+            } 
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            
         }
 
         /**

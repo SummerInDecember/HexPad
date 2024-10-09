@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="HexPad.DeleteFile"
+             Width="400" Height="200">
+
+    <StackPanel Margin="20">
+        <TextBlock Text="Are you sure you want to permanently delete this file?" Margin="0,0,0,20"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Yes" Click="Yes_Click"/>
+            <Button Content="No" Click="No_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

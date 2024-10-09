@@ -3,6 +3,7 @@
         xmlns:vm="clr-namespace:HexPad.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dialogHost="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
         mc:Ignorable="d"
         d:DesignWidth="800" d:DesignHeight="450"
         x:Class="HexPad.Views.FileView"
@@ -12,19 +13,29 @@
         <!-- This sets the DataContext for the previewer in the IDE -->
         <vm:FileViewModel/>
     </Design.DataContext>
-    <Border Background="AliceBlue" Height="450" Margin="0">
-        <ScrollViewer>
-            <TreeView ItemsSource="{Binding FileNode}"
-                    SelectedItems="{Binding SelectedNodes}"
-                    Margin="0"
-                    SelectionMode="Multiple">
-                <TreeView.ItemTemplate>
-                    <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                        <TextBlock Text="{Binding Title}" FontSize="13"/>
-                    </TreeDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </ScrollViewer>
-    </Border>
+            <Border Background="AliceBlue" Height="450" Margin="0">
+                <ScrollViewer>
+                    <TreeView ItemsSource="{Binding FileNode}"
+                            SelectedItems="{Binding SelectedNodes}"
+                            Margin="0"
+                            SelectionMode="Multiple">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding SubNodes}">
+                                <Button Content="{Binding Title}"  FontSize="13" 
+                                Command="{Binding NodeClicked}"
+                                Background="Transparent" BorderThickness="0" HorizontalAlignment="Left">
+                                    <Button.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Rename"/>
+                                            <MenuItem Header="Delete" Command="{Binding DeleteFileCommand}"/>
+                                        </ContextMenu>
+                                    </Button.ContextMenu>
+                                </Button>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </ScrollViewer>
+            </Border>
+
     
 </UserControl>
