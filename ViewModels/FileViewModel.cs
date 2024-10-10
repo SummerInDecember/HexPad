@@ -6,30 +6,46 @@ using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
 using HexPad.Models;
+using System.Threading;
 using ReactiveUI;
 
 namespace HexPad.ViewModels
 {
     public class FileViewModel : ReactiveObject, IRoutableViewModel
     {
+        private ObservableCollection<FileNodes> _FileNode;
+        private ObservableCollection<FileNodes> _SelectedNodes;
         public string? UrlPathSegment {get;} = "FileViewModel";
         public IScreen HostScreen {get;}
 
         public ObservableCollection<FileNodes> FileNode { get; set;}
         public ObservableCollection<FileNodes> SelectedNodes { get; set;}
 
+        public string Folder { get; set; }
 
         public FileViewModel(IScreen screen, MainWindowViewModel mainWin)
         { 
             HostScreen = screen;
-            InitTreeView(mainWin.SelectedFolder);
+            Folder = mainWin.SelectedFolder;
+            PreInitTreeView();
         }
 
-        void InitTreeView(string folder)
+        /**
+        * !Only call this function from the constructor
+        * Initializes some variables
+        */
+        private void PreInitTreeView()
         {
             SelectedNodes = new ObservableCollection<FileNodes>();
             FileNode = new ObservableCollection<FileNodes>();
+            _FileNode = FileNode;
+            _SelectedNodes = SelectedNodes;
 
+            InitTreeView(Folder, FileNode, SelectedNodes);
+        }
+        private void InitTreeView(string folder, ObservableCollection<FileNodes> FileNode,
+                                                    ObservableCollection<FileNodes> SelectedNodes)
+        {
             AddSubFoldersRecursive(folder, FileNode);
 
             try
@@ -41,8 +57,15 @@ namespace HexPad.ViewModels
             {
                 Console.WriteLine(ex);
             }
-
             
+        }
+
+        public void ClearTreeAndReload()
+        {
+            _FileNode.Clear();
+            _SelectedNodes.Clear();
+            InitTreeView(Folder, _FileNode, _SelectedNodes);
+
         }
 
         /**
@@ -58,7 +81,7 @@ namespace HexPad.ViewModels
                 return;
             foreach(string subFol in subFolders)
             {
-                FileNodes subFolderNode = new FileNodes(subFol, new ObservableCollection<FileNodes>());
+                FileNodes subFolderNode = new FileNodes(subFol, new ObservableCollection<FileNodes>(), this);
                 parentNode.Add(subFolderNode);
                 AddSubFoldersRecursive(subFol, subFolderNode.SubNodes);
             }
@@ -71,7 +94,7 @@ namespace HexPad.ViewModels
         {
             foreach(string file in Directory.GetFiles(folder))
             {
-                parentNode.Add(new FileNodes(file));
+                parentNode.Add(new FileNodes(file, this));
             }
         }
     }
