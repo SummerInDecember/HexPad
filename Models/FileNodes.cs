@@ -47,24 +47,28 @@ namespace HexPad.Models
         {
             DialogHost.Show(_deleteFileObj, delegate(object sender, DialogOpenedEventArgs args)
             {
-                _deleteFileObj.Result += result => {
-                    if(result)
-                    {
-                        Console.WriteLine(Title);
-                        if(File.Exists(Title))
-                        {
-                            File.Delete(Title);
-                            _fileViewModel.ClearTreeAndReload(); 
-                        }
-                        else
-                            Console.WriteLine("Unexpected error (I honestly dont know how this happened)");
-                        args.Session.Close();
-                    }
-                    else
-                        args.Session.Close();
-                };
+                _deleteFileObj.Args = args;
+                _deleteFileObj.Result += Result;
             });
             
+        }
+
+        private void Result(DeleteFile sender, bool result)
+        {
+            if(result)
+            {
+                Console.WriteLine(Title);
+                if(File.Exists(Title))
+                {
+                    File.Delete(Title);
+                        _fileViewModel.ClearTreeAndReload(); 
+                }
+                else
+                    Console.WriteLine("Unexpected error (I honestly dont know how this happened)");
+                
+            }
+
+            sender.Args.Session.Close();
         }
 
 

@@ -1,13 +1,16 @@
 using Avalonia.Controls;
 using Avalonia.VisualTree;
+using DialogHostAvalonia;
 using System;
 
 namespace HexPad
 {
+    public delegate void ResultEvent(DeleteFile sender, bool result);
     public partial class DeleteFile : UserControl
     {
-        public event Action<bool> Result;
+        public event ResultEvent Result;
 
+        public DialogOpenedEventArgs Args { get; set; }
         public DeleteFile()
         {
             InitializeComponent();
@@ -15,13 +18,13 @@ namespace HexPad
 
         private void Yes_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            Result?.Invoke(true);
+            Result?.Invoke(this, true);
 
         }
 
         private void No_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            Result?.Invoke(false);
+            Result?.Invoke(this, false);
         }
     }
 }
