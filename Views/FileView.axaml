@@ -26,7 +26,7 @@
                                 Background="Transparent" BorderThickness="0" HorizontalAlignment="Left">
                                     <Button.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Rename"/>
+                                            <MenuItem Header="Rename" Command="{Binding RenameFileCommand}"/>
                                             <MenuItem Header="Delete" Command="{Binding DeleteFileCommand}"/>
                                         </ContextMenu>
                                     </Button.ContextMenu>

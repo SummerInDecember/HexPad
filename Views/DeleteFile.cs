@@ -3,7 +3,7 @@ using Avalonia.VisualTree;
 using DialogHostAvalonia;
 using System;
 
-namespace HexPad
+namespace HexPad.Views
 {
     public delegate void ResultEvent(DeleteFile sender, bool result);
     public partial class DeleteFile : UserControl
