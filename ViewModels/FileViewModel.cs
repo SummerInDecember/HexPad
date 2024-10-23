@@ -46,7 +46,16 @@ namespace HexPad.ViewModels
         private void InitTreeView(string folder, ObservableCollection<FileNodes> FileNode,
                                                     ObservableCollection<FileNodes> SelectedNodes)
         {
-            AddSubFoldersRecursive(folder, FileNode);
+            try
+            {
+                AddSubFoldersRecursive(folder, FileNode);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.WriteLine("PANICKING");
+                return;
+            }
 
             try
             {

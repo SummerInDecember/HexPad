@@ -75,8 +75,7 @@ namespace HexPad.Models
             }
             else if(Directory.Exists(Title))
             {
-                // TODO: Make this delete non empty directories
-                Directory.Delete(Title);
+                DirectoryDeleter(Title);
                 _fileViewModel.ClearTreeAndReload();
             }
             else
@@ -88,6 +87,27 @@ namespace HexPad.Models
             sender.Args.Session.Close();
             sender.Result -= Result;
                 
+            
+        }
+
+        /**
+         * Deletes all the contents in the folder and itself
+         * Firstly it deletes every file in the folder then calls the dunction on the subfolders
+         * and when the current folder (either it be a "root" folder or subfolder) is empty
+         * it gets deleted
+         */
+        private void DirectoryDeleter(string directory)
+        {
+            foreach(string file in Directory.GetFiles(directory))
+                File.Delete(file);
+            
+            foreach(string subFolder in Directory.GetDirectories(directory))
+                DirectoryDeleter(subFolder);
+
+            if(Directory.GetFiles(directory).Length == 0 &&
+               Directory.GetDirectories(directory).Length == 0)
+                Directory.Delete(directory);
+
             
         }
 
